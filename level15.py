@@ -125,29 +125,26 @@ for n in n_list:
 
 # %%
 # q8
-def primes_length(num):
-    array = [False, False] + [True] * (num*2-1)
+import sys
+def primes_sum(num):
+    primes = [False, False] + [True] * (num - 1)
+    for i in range(2, int(num ** 0.5) + 1):
+        if primes[i]:
+            for j in range(i * 2, num + 1, i):
+                primes[j] = False
     
-    for i in range(2, num+1):
-        if array[i]:
-            j = 2
-            while i * j <= num*2:
-                array[i * j] = False
-                j += 1
+    cnt = set()
+    for r in range(2, num // 2 + 1):
+        if primes[r] and primes[num - r]:
+            cnt.add(min(r, num - r))
     
-    result_list = [array.index(j) for j in array if j]
-    cnt = 0
-    for r in result_list:
-        if num-r in result_list:
-            cnt += 1
-
-    return cnt // 2
+    return len(cnt)
 
 N = int(input())
 n_list = [int(input()) for _ in range(N)]
 for n in n_list:
-
+    print(primes_sum(n))
 
 # %%
-test = [True, True, False]
-print(sum(test))
+# q9
+N = int(input())
