@@ -90,14 +90,13 @@ for i in n_list:
 # %%
 # q6
 M, N = map(int, input().split())
-n_list = list(range(max(2, M)), N+1)
 for i in range(M, N+1):
     cnt = 0
     for j in range(2, int(i**0.5)+1):
         if i % j == 0:
             cnt += 1
             break
-    if cnt == 0:
+    if cnt == 0 and i > 1:
         print(i)
 
 # %%
@@ -126,25 +125,38 @@ for n in n_list:
 # %%
 # q8
 import sys
-def primes_sum(num):
-    primes = [False, False] + [True] * (num - 1)
+def primes_sum(num_list):
+    num = max(num_list)
+    primes = [False, False] + [True] * (num-1)
     for i in range(2, int(num ** 0.5) + 1):
         if primes[i]:
-            for j in range(i * 2, num + 1, i):
-                primes[j] = False
+            j = 2
+        while i * j <= num:
+            primes[i * j] = False
+            j += 1
     
-    cnt = set()
-    for r in range(2, num // 2 + 1):
-        if primes[r] and primes[num - r]:
-            cnt.add(min(r, num - r))
-    
-    return len(cnt)
+    for nl in num_list:
+        cnt = 0
+        for r in range(2, nl // 2 + 1):
+            if primes[r] and primes[nl - r]:
+                cnt += 1
+        
+        print(cnt)
 
 N = int(input())
 n_list = [int(input()) for _ in range(N)]
-for n in n_list:
-    print(primes_sum(n))
+primes_sum(n_list)
 
 # %%
 # q9
 N = int(input())
+n_list = [-1] + [1] * N
+for i in range(2, N+1):
+    if n_list[i]:
+            j = 1
+            while i * j <= N:
+                n_list[i * j] *= -1
+                j += 1
+
+print(n_list.count(1))
+# print(int(N**0.5)) # <-- 얘는 꼼수 느낌..
