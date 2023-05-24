@@ -63,35 +63,17 @@ print(max(n_list) - min(n_list))
 # %%
 # q5
 import sys
-from collections import Counter
 n, m = map(int, input().split())
-# words = []
-# for _ in range(n):
-#     w = input()
-#     if len(w) >= m:
-#         words.append(w)
-words = ['appearance',
-'append',
-'attendance',
-'swift',
-'swift',
-'swift',
-'mouse',
-'wallet',
-'mouse']
+words = {}
+for _ in range(n):
+    w = sys.stdin.readline().rstrip()
+    if len(w) >= m:
+        if w in words.keys():
+            words[w] += 1
+        else:
+            words[w] = 1
 
-wc = Counter(words)
+words = sorted(words.items(), key=lambda x: (-x[1], -len(x[0]), x[0]))
 
-w_cnt = sorted(list(wc.values()))
-w_len = sorted([len(word) for word in set(words)])
-
-dict_cnt = dict(wc)
-dict_len = {word:len(word) for word in words}
-
-for i in range(len(words)):
-    for j in set(words):
-        if w_cnt[i] == dict_cnt[j]:
-            print(j)
-
-# %%
-test = {}
+for word in words:
+    print(word[0])
