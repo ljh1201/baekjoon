@@ -12,7 +12,6 @@ for m in m_list:
     else:
         print(0, end=' ')
 
-
 # %%
 # q2
 import sys
@@ -56,5 +55,42 @@ for q in question_list:
 
 
 # %%
-test = {'a':1, 'b':2}
-print(test['a'])
+# q5
+import sys
+from collections import Counter
+N = int(input())
+n_list = list(map(int, input().split()))
+n_dict = Counter(n_list)
+M = int(input())
+m_list = map(int, input().split())
+
+for m in m_list:
+    print(n_dict.get(m, 0), end = ' ')
+
+# %%
+# q6
+N, M = map(int, input().split())
+n_list = set(input() for _ in range(N))
+m_list = set(input() for _ in range(M))
+print(len(m_list & n_list))
+print('\n'.join(sorted(m_list & n_list)))
+
+# %%
+# q7
+import sys
+A, B = map(int, input().split())
+a_list = set(map(int, sys.stdin.readline().split()))
+b_list = set(map(int, sys.stdin.readline().split()))
+
+print(len(a_list - b_list) + len(b_list - a_list))
+
+# %%
+# q8
+def string_length(S):
+    s_set = set()
+    for i in range(0, len(S)):
+        for j in range(i+1, len(S)+1):
+            s_set.add(S[i:j])
+    return len(s_set)
+S = input()
+print(string_length(S))
