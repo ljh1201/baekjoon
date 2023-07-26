@@ -71,9 +71,3 @@ for _ in range(T):
         else:
             document_list.rotate(-1)
     print(cnt)
-
-# %%
-test = ['1','2']
-print(sum(map(int, test)))
-print(test)
-print('2' == 2)
